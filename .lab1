@@ -1,1 +1,16 @@
-
+#!/bin/bash
+parol() {
+    local dlina=$1
+    tr -dc 'A-Za-z0-9!@#$%^&*()_+' < /dev/urandom | head -c "$dlina"
+    echo
+}
+if [ "$#" -ne 2 ]; then
+    echo "введите кол-во паролей и их длину"
+    exit 1
+fi
+count=$1
+dlina=$2
+for ((i = 0; i < count; i++)); do
+    parol_rez=$(parol "$dlina")
+    echo "Пароль $((i + 1)): $parol_rez"
+done
